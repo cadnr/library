@@ -26,7 +26,44 @@ function displayBooks(library) {
     tr.append(title, author, pages, read);
     table.appendChild(tr);
   });
-  divBooks.appendChild(table);
+
+  if (!document.querySelector('.books table')) {
+    divBooks.appendChild(table);
+  } else {
+    const oldTable = document.querySelector('.books table');
+    divBooks.replaceChild(table, oldTable);
+  }
 }
 
 displayBooks(myLibrary);
+
+const inputTitle = document.querySelector('input#title');
+const inputAuthor = document.querySelector('input#author');
+const inputPages = document.querySelector('input#pages');
+const inputRead = document.querySelector('input#read');
+
+const form = document.querySelector('.form');
+const newBookFormButton = document.querySelector('#open-new-book-form');
+newBookFormButton.addEventListener('click', () => {
+  form.classList.toggle('opened');
+  newBookFormButton.textContent = form.classList.contains('opened')
+    ? 'Close'
+    : 'New book';
+});
+
+function addBookToLibrary(title, author, pages, read) {
+  const newBook = new Book(title, author, pages, read);
+  myLibrary.push(newBook);
+}
+
+const addNewBookButton = document.querySelector('button.add-new-book');
+addNewBookButton.addEventListener('click', () => {
+  const title = inputTitle.value;
+  const author = inputAuthor.value;
+  const pages = inputPages.value;
+  const read = inputRead.checked;
+
+  addBookToLibrary(title, author, pages, read);
+
+  displayBooks(myLibrary);
+});

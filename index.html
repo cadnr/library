@@ -8,7 +8,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <button class="new-book" id="open-new-book-form">New book</button>
   <div class="books"></div>
+  <div class="form">
+    <h2>New book</h2>
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title">
+    <label for="author">Author</label>
+    <input type="text" id="author" name="author">
+    <label for="pages">Pages</label>
+    <input type="text" id="pages" name="pages">
+    <label for="read">Read</label>
+    <input type="checkbox" name="read" id="read" value=true>
+    <button class="add-new-book">Add new book</button>
+  </div>
   <script src="library.js"></script>
 </body>
 </html>

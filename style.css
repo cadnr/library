@@ -1,0 +1,33 @@
+.form {
+  display: none;
+  background-color: green;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10%;
+}
+
+.form.opened {
+  display: flex;
+  flex-direction: column;
+}
+
+.form div,
+.form input {
+  padding: 0.1rem;
+  margin: 0.2rem;
+}
+
+button {
+  display: block;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;
+  border-radius: 25%;
+  border-style: none;
+  background-color: burlywood;
+}
+
