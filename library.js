@@ -13,16 +13,17 @@ const myLibrary = [theHobbit, theOtherBook];
 function displayBooks(library) {
   const divBooks = document.querySelector('div.books');
   const table = document.createElement('table');
-  Object.values(library).forEach((book) => {
+  Object.entries(library).forEach((book) => {
     const tr = document.createElement('tr');
     const title = document.createElement('td');
     const author = document.createElement('td');
     const pages = document.createElement('td');
     const read = document.createElement('td');
-    title.textContent = book.title;
-    author.textContent = book.author;
-    pages.textContent = book.pages;
-    read.textContent = book.read;
+    title.textContent = book[1].title;
+    author.textContent = book[1].author;
+    pages.textContent = book[1].pages;
+    read.textContent = book[1].read;
+    tr.setAttribute('data-index', book[0]);
     tr.append(title, author, pages, read);
     table.appendChild(tr);
   });
