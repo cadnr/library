@@ -19,12 +19,16 @@ function displayBooks(library) {
     const author = document.createElement('td');
     const pages = document.createElement('td');
     const read = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('delete');
+
     title.textContent = book[1].title;
     author.textContent = book[1].author;
     pages.textContent = book[1].pages;
     read.textContent = book[1].read;
     tr.setAttribute('data-index', book[0]);
-    tr.append(title, author, pages, read);
+    tr.append(title, author, pages, read, deleteButton);
     table.appendChild(tr);
   });
 
@@ -34,6 +38,19 @@ function displayBooks(library) {
     const oldTable = document.querySelector('.books table');
     divBooks.replaceChild(table, oldTable);
   }
+  // eslint-disable-next-line no-use-before-define
+  addDeleteListeners();
+}
+
+function addDeleteListeners() {
+  const deleteButton = document.querySelectorAll('button.delete');
+  deleteButton.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const index = e.target.parentNode.attributes['data-index'].value;
+      myLibrary.splice(index, 1);
+      displayBooks(myLibrary);
+    });
+  });
 }
 
 displayBooks(myLibrary);
