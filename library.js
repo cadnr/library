@@ -19,6 +19,9 @@ function displayBooks(library) {
     const author = document.createElement('td');
     const pages = document.createElement('td');
     const read = document.createElement('td');
+    const readButton = document.createElement('button');
+    readButton.textContent = 'Read/Not read';
+    readButton.classList.add('read');
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.classList.add('delete');
@@ -26,9 +29,9 @@ function displayBooks(library) {
     title.textContent = book[1].title;
     author.textContent = book[1].author;
     pages.textContent = book[1].pages;
-    read.textContent = book[1].read;
+    read.textContent = book[1].read ? 'Read' : 'Not read';
     tr.setAttribute('data-index', book[0]);
-    tr.append(title, author, pages, read, deleteButton);
+    tr.append(title, author, pages, read, readButton, deleteButton);
     table.appendChild(tr);
   });
 
@@ -38,6 +41,7 @@ function displayBooks(library) {
     const oldTable = document.querySelector('.books table');
     divBooks.replaceChild(table, oldTable);
   }
+  addReadListeners();
   // eslint-disable-next-line no-use-before-define
   addDeleteListeners();
 }
@@ -85,3 +89,14 @@ addNewBookButton.addEventListener('click', () => {
 
   displayBooks(myLibrary);
 });
+
+function addReadListeners() {
+  const readButton = document.querySelectorAll('button.read');
+  readButton.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const index = e.target.parentNode.attributes['data-index'].value;
+      myLibrary[index].read = !myLibrary[index].read;
+      displayBooks(myLibrary);
+    });
+  });
+}
